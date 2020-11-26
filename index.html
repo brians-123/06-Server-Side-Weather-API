@@ -9,93 +9,98 @@
     <script src="https://kit.fontawesome.com/80bd9b5d32.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles/style.css" />
-    <title>asdf</title>
+    <title>Weather Forecast</title>
 </head>
 
 <body>
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <div>
-        <h2>Search for a City:</h2><br>
-        <input placeholder="Search..." />
-        <i class="fas fa-search"></i>
+    <div class="container mw-100 w-100 mx-0">
+        <div class="row">
+            <div class="col-3 bg-light">
+                <div>
+                    <h2>Search for a City:</h2><br>
+                    <input placeholder="Search..." />
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="card my-3" style="width: 18rem;">
+                    <!-- <div class="card-header">
+                        Featured
+                    </div> -->
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <h3>City Name Here: </h3>
+                            <p>Tempature Here: </p>
+                            <p>Humidity: </p>
+                            <p>Wind Speed: </p>
+                            <p>UV Index: </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>5 Day Forecast</h2>
+                </div>
+                <div class="card-deck my-3">
+                    <div class="card">
+                        <h5>Date Placeholder</h5>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <p class="card-text">Temp: </p>
+                            <p class="card-text">Humidity: </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5>Date Placeholder</h5>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <p class="card-text">Temp: </p>
+                            <p class="card-text">Humidity: </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5>Date Placeholder</h5>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <p class="card-text">Temp: </p>
+                            <p class="card-text">Humidity: </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5>Date Placeholder</h5>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <p class="card-text">Temp: </p>
+                            <p class="card-text">Humidity: </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5>Date Placeholder</h5>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <p class="card-text">Temp: </p>
+                            <p class="card-text">Humidity: </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                One of three columns
-            </div>
-            <div class="col-sm">
-                One of three columns
-            </div>
-            <div class="col-sm">
-                One of three columns
-            </div>
-        </div>
-    </div>
-    <div class="card my-3" style="width: 18rem;">
-        <div class="card-header">
-            Featured
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            This is some text within a card body.
-        </div>
-    </div>
-    <div class="card-deck">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
+
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="scripts/script.js"></script>
