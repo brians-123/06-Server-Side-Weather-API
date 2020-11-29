@@ -4,3 +4,12 @@ h1 {
   color: white;
   padding: 20px 20px;
 }
+
+/*making this hidden then visible seems to display a blank image */
+/* .card-img-top {
+  visibility: hidden;
+} */
+
+#day-0-icon {
+  max-width: 25%;
+}
