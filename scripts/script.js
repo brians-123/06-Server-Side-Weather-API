@@ -4,8 +4,9 @@ let latLonQueryURL = "";
 let myLat = "";
 let myLon = "";
 let fiveDayForecast = {};
+let cityName = "";
 
-//add days of week using moment api and formatting
+//add days of week and format with moment.js api
 $("#date-1").text(moment().add(1, "days").format("dddd"));
 $("#date-2").text(moment().add(2, "days").format("dddd"));
 $("#date-3").text(moment().add(3, "days").format("dddd"));
@@ -36,62 +37,16 @@ if (JSON.parse(localStorage.getItem("WeatherDashboard")) != null) {
   }
 }
 
+//search the OpenWeatherAPIs using the city name
 $("#city-search-button").on("click", function () {
-  let cityName = $("#city-search-input").val();
+  cityName = $("#city-search-input").val();
   $("#city-name").text(cityName);
-
-  const cityQueryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
-    cityName +
-    "&appid=" +
-    myAPIKey;
-
-  //asynchronous call to openweather API to get the latitude and longitude
-  $.ajax({
-    url: cityQueryURL,
-    method: "GET",
-  })
-    .then(function (response) {
-      myLat = response.coord.lat;
-      myLon = response.coord.lon;
-      latLonQueryURL =
-        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-        myLat +
-        "&lon=" +
-        myLon +
-        "&exclude=minutely,hourly&units=imperial&appid=" +
-        myAPIKey;
-
-      //
-      let thisCity = cityName;
-
-      //if cityArray doesn't contain thisCity add to the array
-      if (!cityArray.includes(thisCity)) {
-        cityArray.push(thisCity);
-        let newCityEl = $(`<li class="list-group-item">` + thisCity + `</li>`);
-        $(cityHistoryEl).prepend(newCityEl);
-        localStorage.setItem("WeatherDashboard", JSON.stringify(cityArray));
-      }
-    })
-
-    //wait for the response to get the latitude and longitude then use a different api
-    //to get the 5 day forecast
-    .then(function (myDailyWeatherResponse) {
-      $.ajax({
-        url: latLonQueryURL,
-        method: "GET",
-      })
-        //save the response to an object
-        .then(function (saveFiveDay) {
-          fiveDayForecast = saveFiveDay;
-          renderWeatherResults(fiveDayForecast);
-          console.log(saveFiveDay);
-        });
-    });
+  searchOpenWeatherAPI(cityName);
 });
 
-let uVIndexColor = "";
-function renderWeatherResults(weatherResults) {
+//renders weather info onto the page
+function renderWeatherResults() {
+  let uVIndexColor = "";
   if (fiveDayForecast.daily[0].uvi <= 2) {
     uVIndexColor = "green";
   } else if (fiveDayForecast.daily[0].uvi <= 5) {
@@ -174,15 +129,64 @@ function renderWeatherResults(weatherResults) {
   $("#day-5-humidity").text(fiveDayForecast.daily[5].humidity);
 }
 
-//create on click event that allows looking up prior results
+//Allows looking up prior city data by clicking the recent search
+//and formats based on clicks
 $(".list-group-item").on("click", function () {
-  //make current selection green
   $(this).css("background-color", "green");
-  //make all other selections go back to the prior color
   $(this).siblings().css("background-color", "white");
   //pull info back from local storage and populate the elements appropriately
+  cityName = $(this).text();
+  searchOpenWeatherAPI(cityName);
 });
 
 //separating function to search for OpenWeather API info
 //as the storage is persistant in local storage and the user could come
 //back and search again after a day, we want to always search the apis
+function searchOpenWeatherAPI(cityName) {
+  const cityQueryURL =
+    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    cityName +
+    "&appid=" +
+    myAPIKey;
+
+  //asynchronous call to openweather API to get the latitude and longitude
+  $.ajax({
+    url: cityQueryURL,
+    method: "GET",
+  })
+    .then(function (response) {
+      let thisCity = cityName;
+      myLat = response.coord.lat;
+      myLon = response.coord.lon;
+      latLonQueryURL =
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        myLat +
+        "&lon=" +
+        myLon +
+        "&exclude=minutely,hourly&units=imperial&appid=" +
+        myAPIKey;
+
+      //if cityArray doesn't contain thisCity add to the array
+      if (!cityArray.includes(thisCity)) {
+        cityArray.push(thisCity);
+        let newCityEl = $(`<li class="list-group-item">` + thisCity + `</li>`);
+        $(cityHistoryEl).prepend(newCityEl);
+        localStorage.setItem("WeatherDashboard", JSON.stringify(cityArray));
+      }
+    })
+
+    //wait for the response to get the latitude and longitude then use a different api
+    //to get the 5 day forecast
+    .then(function () {
+      $.ajax({
+        url: latLonQueryURL,
+        method: "GET",
+      })
+        //save the response to an object
+        .then(function (saveFiveDay) {
+          fiveDayForecast = saveFiveDay;
+          renderWeatherResults(fiveDayForecast);
+          console.log(saveFiveDay);
+        });
+    });
+}
