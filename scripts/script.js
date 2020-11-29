@@ -39,6 +39,7 @@ if (JSON.parse(localStorage.getItem("WeatherDashboard")) != null) {
 $("#city-search-button").on("click", function () {
   let cityName = $("#city-search-input").val();
   $("#city-name").text(cityName);
+
   const cityQueryURL =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
@@ -88,6 +89,7 @@ $("#city-search-button").on("click", function () {
         });
     });
 });
+
 let uVIndexColor = "";
 function renderWeatherResults(weatherResults) {
   if (fiveDayForecast.daily[0].uvi <= 2) {
@@ -171,3 +173,16 @@ function renderWeatherResults(weatherResults) {
   $("#day-4-humidity").text(fiveDayForecast.daily[4].humidity);
   $("#day-5-humidity").text(fiveDayForecast.daily[5].humidity);
 }
+
+//create on click event that allows looking up prior results
+$(".list-group-item").on("click", function () {
+  //make current selection green
+  $(this).css("background-color", "green");
+  //make all other selections go back to the prior color
+  $(this).siblings().css("background-color", "white");
+  //pull info back from local storage and populate the elements appropriately
+});
+
+//separating function to search for OpenWeather API info
+//as the storage is persistant in local storage and the user could come
+//back and search again after a day, we want to always search the apis
