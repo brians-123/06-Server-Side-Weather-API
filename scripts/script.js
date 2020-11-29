@@ -5,13 +5,12 @@ let myLat = "";
 let myLon = "";
 let fiveDayForecast = {};
 
-//define days using moment api and formatting
-const dateZero = moment().format("dddd");
-const dateOne = moment().add(1, "days").format("dddd");
-const dateTwo = moment().add(2, "days").format("dddd");
-const dateThree = moment().add(3, "days").format("dddd");
-const dateFour = moment().add(4, "days").format("dddd");
-const dateFive = moment().add(5, "days").format("dddd");
+//add days of week using moment api and formatting
+$("#date-1").text(moment().add(1, "days").format("dddd"));
+$("#date-2").text(moment().add(2, "days").format("dddd"));
+$("#date-3").text(moment().add(3, "days").format("dddd"));
+$("#date-4").text(moment().add(4, "days").format("dddd"));
+$("#date-5").text(moment().add(5, "days").format("dddd"));
 
 //define html placeholder elements
 const todayTempEl = $("#today-temp");
@@ -36,12 +35,6 @@ if (JSON.parse(localStorage.getItem("WeatherDashboard")) != null) {
     $(cityHistoryEl).prepend(thisSavedCityEl);
   }
 }
-
-$("#date-1").text(dateOne);
-$("#date-2").text(dateTwo);
-$("#date-3").text(dateThree);
-$("#date-4").text(dateFour);
-$("#date-5").text(dateFive);
 
 $("#city-search-button").on("click", function () {
   let cityName = $("#city-search-input").val();
@@ -91,52 +84,82 @@ $("#city-search-button").on("click", function () {
         .then(function (saveFiveDay) {
           fiveDayForecast = saveFiveDay;
           renderWeatherResults(fiveDayForecast);
+          console.log(saveFiveDay);
         });
     });
 });
+let uVIndexColor = "";
 function renderWeatherResults(weatherResults) {
+  if (fiveDayForecast.daily[0].uvi <= 2) {
+    uVIndexColor = "green";
+  } else if (fiveDayForecast.daily[0].uvi <= 5) {
+    uVIndexColor = "yellow";
+  } else if (fiveDayForecast.daily[0].uvi <= 7) {
+    uVIndexColor = "orange";
+  } else if (fiveDayForecast.daily[0].uvi <= 10) {
+    uVIndexColor = "red";
+  } else {
+    uVIndexColor = "violet";
+  }
+
   todayTempEl.text(fiveDayForecast.daily[0].temp.day + "\u00B0 F");
   todayHumidityEl.text(fiveDayForecast.daily[0].humidity + "%");
   todayWindEl.text(fiveDayForecast.daily[0].wind_speed + "mph");
-  todayUVEl.text(fiveDayForecast.daily[0].uvi);
+  todayUVEl
+    .text(fiveDayForecast.daily[0].uvi)
+    .css("background-color", uVIndexColor);
 
   //push data from open weather api response to page elements
-  $("#day-0-icon").attr(
-    "src",
-    "https://openweathermap.org/img/wn/" +
-      fiveDayForecast.daily[0].weather[0].icon +
-      "@2x.png"
-  );
-  $("#day-1-icon").attr(
-    "src",
-    "https://openweathermap.org/img/wn/" +
-      fiveDayForecast.daily[1].weather[0].icon +
-      "@2x.png"
-  );
-  $("#day-2-icon").attr(
-    "src",
-    "https://openweathermap.org/img/wn/" +
-      fiveDayForecast.daily[2].weather[0].icon +
-      "@2x.png"
-  );
-  $("#day-3-icon").attr(
-    "src",
-    "https://openweathermap.org/img/wn/" +
-      fiveDayForecast.daily[3].weather[0].icon +
-      "@2x.png"
-  );
-  $("#day-4-icon").attr(
-    "src",
-    "https://openweathermap.org/img/wn/" +
-      fiveDayForecast.daily[4].weather[0].icon +
-      "@2x.png"
-  );
-  $("#day-5-icon").attr(
-    "src",
-    "https://openweathermap.org/img/wn/" +
-      fiveDayForecast.daily[5].weather[0].icon +
-      "@2x.png"
-  );
+  $("#day-0-icon")
+    .attr(
+      "src",
+      "https://openweathermap.org/img/wn/" +
+        fiveDayForecast.daily[0].weather[0].icon +
+        "@2x.png"
+    )
+    .show();
+  $("#day-1-icon")
+    .attr(
+      "src",
+      "https://openweathermap.org/img/wn/" +
+        fiveDayForecast.daily[1].weather[0].icon +
+        "@2x.png"
+    )
+    .show();
+
+  $("#day-2-icon")
+    .attr(
+      "src",
+      "https://openweathermap.org/img/wn/" +
+        fiveDayForecast.daily[2].weather[0].icon +
+        "@2x.png"
+    )
+    .show();
+
+  $("#day-3-icon")
+    .attr(
+      "src",
+      "https://openweathermap.org/img/wn/" +
+        fiveDayForecast.daily[3].weather[0].icon +
+        "@2x.png"
+    )
+    .show();
+  $("#day-4-icon")
+    .attr(
+      "src",
+      "https://openweathermap.org/img/wn/" +
+        fiveDayForecast.daily[4].weather[0].icon +
+        "@2x.png"
+    )
+    .show();
+  $("#day-5-icon")
+    .attr(
+      "src",
+      "https://openweathermap.org/img/wn/" +
+        fiveDayForecast.daily[5].weather[0].icon +
+        "@2x.png"
+    )
+    .show();
   $("#day-1-temp").text(fiveDayForecast.daily[1].temp.day + "\u00B0 F");
   $("#day-2-temp").text(fiveDayForecast.daily[2].temp.day + "\u00B0 F");
   $("#day-3-temp").text(fiveDayForecast.daily[3].temp.day + "\u00B0 F");

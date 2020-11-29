@@ -6,10 +6,18 @@ h1 {
 }
 
 /*making this hidden then visible seems to display a blank image */
-/* .card-img-top {
-  visibility: hidden;
-} */
+.card-img-top {
+  display: none;
+}
+
+h2 {
+  margin: 20px 20px;
+}
 
 #day-0-icon {
-  max-width: 25%;
+  max-width: 20%;
+}
+
+.card-img-top {
+  max-width: 40%;
 }
