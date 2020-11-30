@@ -18,7 +18,7 @@ The app offers the ability to search by city and will display the current day's 
 
 ## Demo
 
-![Demo](assets/Weather-Dashboard.gif)
+![Demo](.assets/Weather-Dashboard.gif)
 
 ## User Story
 
