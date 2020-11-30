@@ -14,6 +14,8 @@ Bootstrap: the vast majority of the style and formattting came from bootstrap.
 
 The app offers the ability to search by city and will display the current day's weather along with a 5 day forecast. The page will display highlighted UV Index depending on the healthiness of the conditions as well as weather icons making the page more engaging. Upon searching, the city will move to the top of the recent searches list. This list is clickable and will provide the same functionality as searching by city. Cities will be displayed in local storage to quickly come back to where the person left off.
 
+![Demo](./assets/Weather-Dashboard.gif)
+
 ## User Story
 
 ```
