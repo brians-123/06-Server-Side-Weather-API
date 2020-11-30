@@ -1,7 +1,7 @@
 # 06-Server-Side-Weather-API
 
 ```
-Week 6 of UW boot camp homework assignment
+Week 6 of UW boot camp homework assignment ![hosted here](https://brians-123.github.io/06-Server-Side-Weather-API/)
 
 ```
 
@@ -14,6 +14,7 @@ OpenWeather: two free APIs were used. THe first grabs the latitude and longitude
 Bootstrap: the vast majority of the style and formattting came from bootstrap.
 
 The app offers the ability to search by city and will display the current day's weather along with a 5 day forecast. The page will display highlighted UV Index depending on the healthiness of the conditions as well as weather icons making the page more engaging. Upon searching, the city will move to the top of the recent searches list. This list is clickable and will provide the same functionality as searching by city. Cities will be displayed in local storage to quickly come back to where the person left off.
+
 ```
 
 ## Demo
