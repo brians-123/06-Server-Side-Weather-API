@@ -40,7 +40,6 @@ if (JSON.parse(localStorage.getItem("WeatherDashboard")) != null) {
 //search the OpenWeatherAPIs using the city name
 $("#city-search-button").on("click", function () {
   cityName = $("#city-search-input").val();
-  $("#city-name").text(cityName);
   searchOpenWeatherAPI(cityName);
 });
 
@@ -143,6 +142,7 @@ $(".list-group-item").on("click", function () {
 //as the storage is persistant in local storage and the user could come
 //back and search again after a day, we want to always search the apis
 function searchOpenWeatherAPI(cityName) {
+  $("#city-name").text(cityName);
   const cityQueryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
@@ -170,7 +170,17 @@ function searchOpenWeatherAPI(cityName) {
       if (!cityArray.includes(thisCity)) {
         cityArray.push(thisCity);
         let newCityEl = $(`<li class="list-group-item">` + thisCity + `</li>`);
+
         $(cityHistoryEl).prepend(newCityEl);
+
+        //adding on-click event to allow for recent search functionality to on first load
+        $(".list-group-item").on("click", function () {
+          $(this).css("background-color", "green");
+          $(this).siblings().css("background-color", "white");
+          //pull info back from local storage and populate the elements appropriately
+          cityName = $(this).text();
+          searchOpenWeatherAPI(cityName);
+        });
         localStorage.setItem("WeatherDashboard", JSON.stringify(cityArray));
       }
     })
@@ -186,7 +196,6 @@ function searchOpenWeatherAPI(cityName) {
         .then(function (saveFiveDay) {
           fiveDayForecast = saveFiveDay;
           renderWeatherResults(fiveDayForecast);
-          console.log(saveFiveDay);
         });
     });
 }
