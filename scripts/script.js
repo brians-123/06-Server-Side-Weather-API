@@ -144,7 +144,7 @@ $(".list-group-item").on("click", function () {
 //back and search again after a day, we want to always search the apis
 function searchOpenWeatherAPI(cityName) {
   const cityQueryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
     "&appid=" +
     myAPIKey;

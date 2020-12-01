@@ -1,9 +1,6 @@
 # 06-Server-Side-Weather-API
 
-```
 Week 6 of UW boot camp homework assignment ![hosted here](https://brians-123.github.io/06-Server-Side-Weather-API/)
-
-```
 
 ## Description
 
