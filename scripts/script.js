@@ -175,6 +175,7 @@ function searchOpenWeatherAPI(cityName) {
         cityArray.push(thisCity);
         let newCityEl = $(`<li class="list-group-item">` + thisCity + `</li>`);
         newCityEl.css("background-color", "green");
+        $(cityHistoryEl).children().css("background-color", "white");
         $(cityHistoryEl).prepend(newCityEl);
 
         //adding on-click event to allow for recent search functionality on first load
