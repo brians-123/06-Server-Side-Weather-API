@@ -6,18 +6,12 @@ let myLon = "";
 let fiveDayForecast = {};
 let cityName = "";
 
-//add days of week and format with moment.js api
-$("#date-1").text(moment().add(1, "days").format("dddd"));
-$("#date-2").text(moment().add(2, "days").format("dddd"));
-$("#date-3").text(moment().add(3, "days").format("dddd"));
-$("#date-4").text(moment().add(4, "days").format("dddd"));
-$("#date-5").text(moment().add(5, "days").format("dddd"));
+//iterate over the days of the week for 5 day forecast
+for (let i = 1; i < 6; i++) {
+  $(`#date-` + i).text(moment().add(i, "days").format("dddd"));
+}
 
 //define html placeholder elements
-const todayTempEl = $("#today-temp");
-const todayHumidityEl = $("#today-humidity");
-const todayWindEl = $("#today-wind");
-const todayUVEl = $("#today-uv");
 const cityHistoryEl = $(".city-history");
 const cityNameEl = $("#city-name");
 
@@ -62,74 +56,29 @@ function renderWeatherResults() {
     uVIndexColor = "violet";
   }
 
-  todayTempEl.text(fiveDayForecast.daily[0].temp.day + "\u00B0 F");
-  todayHumidityEl.text(fiveDayForecast.daily[0].humidity + "%");
-  todayWindEl.text(fiveDayForecast.daily[0].wind_speed + "mph");
-  todayUVEl
+  // todayTempEl.text(fiveDayForecast.daily[0].temp.day + "\u00B0 F");
+  // todayHumidityEl.text(fiveDayForecast.daily[0].humidity + "%");
+  $("#day-0-wind").text(fiveDayForecast.daily[0].wind_speed + "mph");
+  $("#day-0-uv")
     .text(fiveDayForecast.daily[0].uvi)
     .css("background-color", uVIndexColor);
 
   //push data from open weather api response to page elements
-  $("#day-0-icon")
-    .attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        fiveDayForecast.daily[0].weather[0].icon +
-        "@2x.png"
-    )
-    .show();
-  $("#day-1-icon")
-    .attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        fiveDayForecast.daily[1].weather[0].icon +
-        "@2x.png"
-    )
-    .show();
-
-  $("#day-2-icon")
-    .attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        fiveDayForecast.daily[2].weather[0].icon +
-        "@2x.png"
-    )
-    .show();
-
-  $("#day-3-icon")
-    .attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        fiveDayForecast.daily[3].weather[0].icon +
-        "@2x.png"
-    )
-    .show();
-  $("#day-4-icon")
-    .attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        fiveDayForecast.daily[4].weather[0].icon +
-        "@2x.png"
-    )
-    .show();
-  $("#day-5-icon")
-    .attr(
-      "src",
-      "https://openweathermap.org/img/wn/" +
-        fiveDayForecast.daily[5].weather[0].icon +
-        "@2x.png"
-    )
-    .show();
-  $("#day-1-temp").text(fiveDayForecast.daily[1].temp.day + "\u00B0 F");
-  $("#day-2-temp").text(fiveDayForecast.daily[2].temp.day + "\u00B0 F");
-  $("#day-3-temp").text(fiveDayForecast.daily[3].temp.day + "\u00B0 F");
-  $("#day-4-temp").text(fiveDayForecast.daily[4].temp.day + "\u00B0 F");
-  $("#day-5-temp").text(fiveDayForecast.daily[5].temp.day + "\u00B0 F");
-  $("#day-1-humidity").text(fiveDayForecast.daily[1].humidity);
-  $("#day-2-humidity").text(fiveDayForecast.daily[2].humidity);
-  $("#day-3-humidity").text(fiveDayForecast.daily[3].humidity);
-  $("#day-4-humidity").text(fiveDayForecast.daily[4].humidity);
-  $("#day-5-humidity").text(fiveDayForecast.daily[5].humidity);
+  //looping through each of the 5 day's elements to update
+  for (let i = 0; i < 6; i++) {
+    $(`#day-` + i + `-icon`)
+      .attr(
+        "src",
+        "https://openweathermap.org/img/wn/" +
+          fiveDayForecast.daily[i].weather[0].icon +
+          "@2x.png"
+      )
+      .show();
+    $(`#day-` + i + `-temp`).text(
+      fiveDayForecast.daily[i].temp.day + "\u00B0 F"
+    );
+    $(`#day-` + i + `-humidity`).text(fiveDayForecast.daily[i].humidity);
+  }
 }
 
 //Allows looking up prior city data by clicking the recent search
