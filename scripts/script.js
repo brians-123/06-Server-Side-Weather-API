@@ -43,6 +43,7 @@ $("#city-search-button").on("click", function () {
 
 //renders weather info onto the page
 function renderWeatherResults() {
+  //sets uv index highlights based on world standard
   let uVIndexColor = "";
   if (fiveDayForecast.daily[0].uvi <= 2) {
     uVIndexColor = "green";
@@ -56,8 +57,6 @@ function renderWeatherResults() {
     uVIndexColor = "violet";
   }
 
-  // todayTempEl.text(fiveDayForecast.daily[0].temp.day + "\u00B0 F");
-  // todayHumidityEl.text(fiveDayForecast.daily[0].humidity + "%");
   $("#day-0-wind").text(fiveDayForecast.daily[0].wind_speed + "mph");
   $("#day-0-uv")
     .text(fiveDayForecast.daily[0].uvi)
@@ -86,6 +85,7 @@ function renderWeatherResults() {
 $(".list-group-item").on("click", function () {
   $(this).css("background-color", "green");
   $(this).siblings().css("background-color", "white");
+
   //pull info back from local storage and populate the elements appropriately
   cityName = $(this).text();
   searchOpenWeatherAPI(cityName);
