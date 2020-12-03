@@ -28,12 +28,16 @@ let cityArray = [];
 //pull back saved local storage and render on the page
 if (JSON.parse(localStorage.getItem("WeatherDashboard")) != null) {
   cityArray = JSON.parse(localStorage.getItem("WeatherDashboard"));
-
+  cityName = cityArray[cityArray.length - 1];
   for (j = 0; j < cityArray.length; j++) {
     let thisSavedCityEl = $(
       `<li class="list-group-item">` + cityArray[j] + `</li>`
     );
+    if (j === cityArray.length - 1) {
+      thisSavedCityEl.css("background-color", "green");
+    }
     $(cityHistoryEl).prepend(thisSavedCityEl);
+    searchOpenWeatherAPI(cityName);
   }
 }
 
@@ -170,10 +174,10 @@ function searchOpenWeatherAPI(cityName) {
       if (!cityArray.includes(thisCity)) {
         cityArray.push(thisCity);
         let newCityEl = $(`<li class="list-group-item">` + thisCity + `</li>`);
-
+        newCityEl.css("background-color", "green");
         $(cityHistoryEl).prepend(newCityEl);
 
-        //adding on-click event to allow for recent search functionality to on first load
+        //adding on-click event to allow for recent search functionality on first load
         $(".list-group-item").on("click", function () {
           $(this).css("background-color", "green");
           $(this).siblings().css("background-color", "white");
